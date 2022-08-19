@@ -1,0 +1,238 @@
+.inputBottom {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.inputBtn {
+    margin-top: 20px;
+
+}
+
+.boxcheck {
+    padding-left: 40px;
+    display: flex;
+
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    -webkit-appearance: none;
+    background: #c6c6c6;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+    cursor: pointer;
+
+}
+
+/* input:checked[type="checkbox"]{
+      background: green;
+  
+  } */
+#cOne:checked[type="checkbox"] {
+    background: red;
+
+}
+
+#cTwo:checked[type="checkbox"] {
+    background: black;
+
+}
+
+#cThree:checked[type="checkbox"] {
+    background: green;
+
+}
+
+#cFour:checked[type="checkbox"] {
+    background: blue;
+
+}
+
+#cFive:checked[type="checkbox"] {
+    background: purple;
+
+}
+
+input[type="checkbox"]::before {
+    content: '';
+    width: 30px;
+    position: absolute;
+    height: 30px;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    transition: 0.5s;
+    transform: scale(1.1);
+    box-shadow: 0.2px 5px rgba(0, 0, 0, 0.2);
+
+
+}
+
+input:checked[type="checkbox"]::before {
+    left: 40px;
+}
+
+.iomoduleCheckbox {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 80%;
+
+
+}
+
+.inputBtn {
+
+
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    flex: 8;
+    margin-left: 190px;
+    margin-top: 20px;
+    
+}
+
+.sumFor {
+    /* border-bottom: 1px solid gray; */
+    margin: 0px 20px;
+   padding-bottom: 16px;
+}
+
+.sumary {
+    width: 120px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: rgb(201, 201, 201);
+    padding: 20px;
+
+  
+}
+
+
+
+.forcasting {
+    width: 120px;
+    height: 27px;
+    margin-top: 20px;
+    /* background-color: rgb(196, 194, 194); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    
+    padding: 20px;
+
+}
+
+.input {
+    height: 78vh;
+    display: flex;
+
+    flex-direction: column;
+}
+
+.inputTop {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+
+.sumFor {
+    display: flex;
+    flex: 4;
+    height: 100%;
+    align-items: center;
+}
+
+.inputBottom {
+    flex: 9;
+    display: flex;
+  
+
+
+}
+
+.inputChart {
+    flex: 10;
+}
+
+.inputBtn>button {
+    width: 160px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    letter-spacing: 1px;
+    border: 1px solid #13232e;
+    cursor: pointer;
+    margin-left: 3px;
+    transition: 0.4s all ease;
+}
+
+.inputBtn>button:hover {
+    color: white;
+    background-color: #13232e;
+}
+
+p {
+    margin-left: 20px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    color: gray;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 500px) {
+    .inputBottom {
+        position: relative;
+
+    }
+
+    .inputChart {
+        width: 100%;
+        margin-top: 60px;
+
+    }
+
+    .iomoduleCheckbox {
+        display: flex;
+        position: absolute;
+        top: 420px;
+
+    }
+
+    .boxcheck {}
+
+    .inputTop {
+        position: relative;
+    }
+
+    .inputBtn {
+        background-color: aqua;
+        width: 400px;
+        position: absolute;
+        top: 40px;
+        right: 80px;
+
+    }
+}

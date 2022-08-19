@@ -1,0 +1,205 @@
+.boxcheck{
+  padding-left: 40px;
+  display: flex;
+  
+}
+input[type="checkbox"]{
+    position: relative;
+     width: 60px;
+     height: 30px;
+     -webkit-appearance: none;
+     background: #c6c6c6;
+     outline: none;
+     border-radius: 20px;
+     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2) ;
+     transition: 0.5s;
+     cursor: pointer;
+
+}
+/* input:checked[type="checkbox"]{
+    background: green;
+
+} */
+#cOne:checked[type="checkbox"]{
+    background: #99B898;
+
+}
+#cTwo:checked[type="checkbox"]{
+    background: #FECEA8;
+
+}
+#cThree:checked[type="checkbox"]{
+    background: #FF847C;
+
+}
+#cFour:checked[type="checkbox"]{
+    background: #E84A5F;
+
+}
+#cFive:checked[type="checkbox"]{
+    background: #2A3638;
+
+}
+input[type="checkbox"]::before{
+    content: '';
+    width: 30px;
+    position: absolute;
+    height: 30px;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+      background: #fff;
+      transition: 0.5s;
+      transform: scale(1.1);
+      box-shadow: 0.2px 5px rgba(0, 0, 0, 0.2);
+
+
+}
+input:checked[type="checkbox"]::before{
+     left: 40px;
+}
+.iomoduleCheckbox{
+   flex: 2;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   
+   height: 80%;
+  
+   
+}
+.modelBtn{
+ 
+   
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   align-items: center;
+    flex: 8;
+    margin-left: 190px;
+   
+}
+.sumFor{
+    /* border-bottom: 1px solid gray; */
+    margin: 0px 20px;
+}
+.sumary{
+    width: 120px;
+    height: 30px;
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.backfont{
+    position: absolute;
+    opacity: 0.3;
+    font-size: 60px;
+    letter-spacing: 1px;
+    top: 55%;
+    left: 30%;
+    
+
+}
+.forcasting{
+    width: 120px;
+    height: 27px;
+    /* background-color: rgb(196, 194, 194); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background-color: rgb(201, 201, 201);
+    padding: 20px;
+    margin-top: 20px;
+    
+}
+.model{
+    height: 78vh;
+    display: flex;
+   
+    flex-direction: column;
+}
+.modelTop{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+ 
+    
+    
+}
+.sumFor{
+    display: flex;
+    flex: 4;
+ height: 100%;
+    align-items: center;
+}
+.modelBottom{
+   flex: 10;
+    display: flex;
+   
+    
+}
+.modelChart{
+    flex: 10;
+    margin-top: 20px;
+}
+.modelBtn > button{
+    width: 160px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    letter-spacing: 1px;
+    border: 1px solid #13232e;
+    cursor: pointer;
+    margin-left: 3px;
+    transition: 0.4s all ease;
+}
+.modelBtn > button:hover{
+    color: white;
+    background-color: #13232e;
+}
+p{
+    margin-left: 20px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    color: gray;
+    font-size: 14px;
+}
+@media only screen and (max-width: 500px) {
+    .modelBottom{
+       position: relative;
+        
+    }
+    .modelChart{
+        width: 100%;
+        margin-top: 60px;
+       
+    }
+    .iomoduleCheckbox{
+        display: flex;
+        position: absolute;
+        top: 420px;
+       
+    }
+    .boxcheck{
+     
+        
+    }
+    .modelTop{
+        position: relative;
+    }
+    .modelBtn{
+        background-color: aqua;
+      width: 400px;
+      position: absolute;
+      top: 40px;
+      right: 80px;
+      
+    }
+  }
