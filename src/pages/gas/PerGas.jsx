@@ -53,6 +53,7 @@ function PerGas() {
     const [arlstm, setArlstm] = useState("");
     const [ttv, setTtv] = useState("");
     const [tttv, settttv] = useState(false);
+    const [bT,setBt] = useState("");
 
     const [model, setModel] = useState("")
 
@@ -68,11 +69,12 @@ function PerGas() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "time_span": time,
-                "model": ["LSTM", "ConvNet", "T2V", "T2Vtransfomer", "basic_transfomer"]
+                "commodity": "gasoline",
+                "model": ["LSTM", "AR LSTM", "ConvNet", "T2V", "T2Vtransfomer", "basic_transfomer"]
             })
 
         };
-        let result = await fetch('http://localhost:5000/forcast-conventional-gasoline', requestOptions)
+        let result = await fetch('http://localhost:5000/performance', requestOptions)
         let finalresult = await result.json()
         console.log(finalresult)
         return finalresult
@@ -247,6 +249,14 @@ function PerGas() {
         }
 
     }
+    function btChange() {
+        if (bT == "AR LSTM") {
+            setBt("")
+        } else {
+            setBt("AR LSTM")
+        }
+
+    }
     const [loading, setLoading] = useState(false);
     useEffect(() => {
 
@@ -265,15 +275,18 @@ function PerGas() {
 
                 <div className="modelTop">
                     <div className="sumFor">
-                        <NavLink to="/inputgas" className="links">
+                        <NavLink to="/input" className="links">
                             <div className="sumary">Sumary</div>
                         </NavLink>
-                        <NavLink to="/gas2" className="links">
+                        <NavLink to="/model" className="links">
                             <div className="forcasting">Forcasting</div>
                         </NavLink>
 
-                        <NavLink to="/pergas" className="links">
+                        <NavLink to="/per" className="links">
                             <div className="forcasting">Performance</div>
+                        </NavLink>
+                        <NavLink to="/naturalgasmatrix" className="links">
+                            <div className="forcasting">Matrix</div>
                         </NavLink>
                     </div>
                     <div className="modelBtn">
@@ -290,15 +303,18 @@ function PerGas() {
                             style={{
                                 backgroundColor: isActiveSixMonth ? '#13232e' : '',
                                 color: isActiveSixMonth ? 'white' : '',
-                            }}>six month</button>
+                            }}>Quater</button>
                         <button onClick={handleClickYear} id='D' style={{
                             backgroundColor: isActiveYear ? '#13232e' : '',
                             color: isActiveYear ? 'white' : '',
                         }}>Year</button>
-                       
+
                     </div>
                 </div>
                 <div className="modelBottom">
+                    <div className="backfont">
+                        NATURAL GAS
+                    </div>
                     <div className="modelChart">
 
 
@@ -316,8 +332,10 @@ function PerGas() {
                             <Line type="monotone" dataKey={ttv} stroke="#FECEA8" strokeWidth={2} dot={false} />
                             <Line type="monotone" dataKey={tttv} stroke="#FF847C" strokeWidth={2} dot={false} />
                             <Line type="monotone" dataKey={arlstm} stroke="#2A3638" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey={bT} stroke="#2A3638" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey="value" stroke="red" strokeWidth={3}  />
                         </LineChart>
-                    </div>
+                    </div>  
                     <div className="iomoduleCheckbox">
                         <div className="boxcheck">
 
@@ -338,6 +356,10 @@ function PerGas() {
                         <div className="boxcheck">
 
                             <input id='cFive' type="checkbox" onClick={arlstmChange} /> <p>ARLSTM</p>
+                        </div>
+                        <div className="boxcheck">
+
+                            <input id='cFive' type="checkbox" onClick={btChange} /> <p>Basic Transfomer</p>
                         </div>
 
 

@@ -53,6 +53,7 @@ function Per() {
     const [arlstm, setArlstm] = useState("");
     const [ttv, setTtv] = useState("");
     const [tttv, settttv] = useState(false);
+    const [bT,setBt] = useState("");
 
     const [model, setModel] = useState("")
 
@@ -69,7 +70,7 @@ function Per() {
             body: JSON.stringify({
                 "time_span": time,
                 "commodity": "natural gas",
-                "model": ["LSTM", "ConvNet", "T2V", "T2Vtransfomer", "basic_transfomer"]
+                "model": ["LSTM", "AR LSTM", "ConvNet", "T2V", "T2Vtransfomer", "basic_transfomer"]
             })
 
         };
@@ -248,6 +249,14 @@ function Per() {
         }
 
     }
+    function btChange() {
+        if (bT == "AR LSTM") {
+            setBt("")
+        } else {
+            setBt("AR LSTM")
+        }
+
+    }
     const [loading, setLoading] = useState(false);
     useEffect(() => {
 
@@ -269,12 +278,15 @@ function Per() {
                         <NavLink to="/input" className="links">
                             <div className="sumary">Sumary</div>
                         </NavLink>
-                        <NavLink to="/naturalgas" className="links">
+                        <NavLink to="/model" className="links">
                             <div className="forcasting">Forcasting</div>
                         </NavLink>
 
                         <NavLink to="/per" className="links">
                             <div className="forcasting">Performance</div>
+                        </NavLink>
+                        <NavLink to="/naturalgasmatrix" className="links">
+                            <div className="forcasting">Matrix</div>
                         </NavLink>
                     </div>
                     <div className="modelBtn">
@@ -296,10 +308,13 @@ function Per() {
                             backgroundColor: isActiveYear ? '#13232e' : '',
                             color: isActiveYear ? 'white' : '',
                         }}>Year</button>
-                        
+
                     </div>
                 </div>
                 <div className="modelBottom">
+                    <div className="backfont">
+                        NATURAL GAS
+                    </div>
                     <div className="modelChart">
 
 
@@ -311,15 +326,16 @@ function Per() {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey={lstm} stroke="#99B898" strokeWidth={3} dot={false} />
+                            <Line type="monotone" dataKey={lstm} stroke="#99B898" strokeWidth={2} dot={false} />
 
-                            <Line type="monotone" dataKey={covnet} stroke="#E84A5F" strokeWidth={3} dot={false} />
-                            <Line type="monotone" dataKey={ttv} stroke="#FECEA8" strokeWidth={3} dot={false} />
-                            <Line type="monotone" dataKey={tttv} stroke="#FF847C" strokeWidth={3} dot={false} />
-                            <Line type="monotone" dataKey={arlstm} stroke="#2A3638" strokeWidth={3} dot={false} />
+                            <Line type="monotone" dataKey={covnet} stroke="#E84A5F" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey={ttv} stroke="#FECEA8" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey={tttv} stroke="#FF847C" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey={arlstm} stroke="#2A3638" strokeWidth={2} dot={false} />
+                            <Line type="monotone" dataKey={bT} stroke="#2A3638" strokeWidth={2} dot={false} />
                             <Line type="monotone" dataKey="value" stroke="red" strokeWidth={3}  />
                         </LineChart>
-                    </div>
+                    </div>  
                     <div className="iomoduleCheckbox">
                         <div className="boxcheck">
 
@@ -340,6 +356,10 @@ function Per() {
                         <div className="boxcheck">
 
                             <input id='cFive' type="checkbox" onClick={arlstmChange} /> <p>ARLSTM</p>
+                        </div>
+                        <div className="boxcheck">
+
+                            <input id='cFive' type="checkbox" onClick={btChange} /> <p>Basic Transfomer</p>
                         </div>
 
 

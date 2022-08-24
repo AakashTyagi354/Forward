@@ -105,7 +105,7 @@ function Input() {
                 <div className="sumFor">
 
                 <NavLink to="/input" className="links">
-                        <div className="sumary">Sumary</div>
+                        <div className="sumary">Summary</div>
                     </NavLink>
                     <NavLink to="/naturalgas" className="links">
                     <div className="forcasting">Forcasting</div>
@@ -114,6 +114,9 @@ function Input() {
                     <NavLink to="/per" className="links">
                         <div className="forcasting">Performance</div>
                     </NavLink>
+                    <NavLink to="/naturalgasmatrix" className="links">
+                            <div className="forcasting">Matrix</div>
+                        </NavLink>
                 </div>
                 <div className="inputBtn">
 
@@ -129,7 +132,7 @@ function Input() {
                         style={{
                             backgroundColor: isActiveSixMonth ? '#13232e' : '',
                             color: isActiveSixMonth ? 'white' : '',
-                        }}>Six Month</button>
+                        }}>Quater</button>
                     <button onClick={handleClickYear} id='D' style={{
                         backgroundColor: isActiveYear ? '#13232e' : '',
                         color: isActiveYear ? 'white' : '',
@@ -145,6 +148,9 @@ function Input() {
                 </div>
             </div>
             <div className="inputBottom">
+            <div className="backfont">
+                        NATURAL GAS
+                    </div>
                 <LineChart width={1250} height={380} data={data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />

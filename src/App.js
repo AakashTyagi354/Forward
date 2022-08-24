@@ -20,6 +20,9 @@ import InputCruid from "./pages/cruidoil/InputCruid"
 import InputGas from './pages/gas/InputGas';
 import PerCruid from './pages/cruidoil/PerCruid';
 import PerGas from './pages/gas/PerGas';
+import CrudeMatrix from './pages/cruidoil/CrudeMatrix';
+import GasMatrix from './pages/gas/GasMatrix';
+import NaturalgasMatrix from './pages/naturalGas/NaturalgasMatrix';
 
 
 
@@ -43,6 +46,10 @@ function App() {
                 <Route path='/inputgas' exact element={<InputGas/>}/>
                 <Route path='/percruid' exact element={<PerCruid/>}/>
                 <Route path='/pergas' exact element={<PerGas/>}/>
+                
+                <Route path='/crudematrix' exact element={<CrudeMatrix/>}/>
+                <Route path='/gasmatrix' exact element={<GasMatrix/>}/>
+                <Route path='/naturalgasmatrix' exact element={<NaturalgasMatrix/>}/>
               </Routes>
             </Router>
     </div>

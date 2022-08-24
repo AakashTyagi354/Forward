@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState, CSSProperties } from 'react'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import FadeLoader from "react-spinners/FadeLoader";
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from "recharts"
+import { LineChart, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from "recharts"
 import { NavLink } from 'react-router-dom';
 import Loader from '../../components/Loader';
 
@@ -28,13 +29,15 @@ const override = CSSProperties = {
     margin: "0 auto",
     borderColor: "red",
 };
-function ModuleTwo() {
+function NaturalgasMatrix() {
+
+  
+ 
 
 
 
 
-
-
+    const [active, setAvtive] = useState(false);
 
     // loading
     const [weekData, setweekData] = useState({})
@@ -45,15 +48,15 @@ function ModuleTwo() {
     const [sixmonth, setSixMonth] = useState("");
     const [year, setYear] = useState("");
     const [time, setTime] = useState("week")
+    const [matrix,setMatrix] = useState("mean_squared_error")
     // check box use state
-    const [myData, setMyData] = useState({});
+    const [myData, setMyData] = useState([]);
 
     const [lstm, setLstm] = useState("");
     const [covnet, setCovnet] = useState("");
     const [arlstm, setArlstm] = useState("");
     const [ttv, setTtv] = useState("");
     const [tttv, settttv] = useState(false);
-    const [bT,setBt] = useState("");
 
     const [model, setModel] = useState("")
 
@@ -69,11 +72,12 @@ function ModuleTwo() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "time_span": time,
-                "model": ["LSTM", "AR LSTM", "ConvNet", "T2V", "T2Vtransfomer", "basic_transfomer"]
+                "commodity":"natural gas",
+                "metrics": matrix
             })
 
         };
-        let result = await fetch('http://localhost:5000/forcast-natural-gas', requestOptions)
+        let result = await fetch('http://localhost:5000/performance-metric', requestOptions)
         let finalresult = await result.json()
         console.log(finalresult)
         return finalresult
@@ -83,8 +87,11 @@ function ModuleTwo() {
 
     useEffect(() => {
         let result = fetchData().then(res => {
-            setMyData(res.results);
-
+            
+          
+            setMyData([res]);
+           
+            
             // let weekResult = res.results.slice(0, 7);
 
             // let monthResult = res.results.slice(0, 30);
@@ -115,6 +122,7 @@ function ModuleTwo() {
 
         setWeek("week");
         setTime("week")
+        
 
         setIsActiveWeek(current => !current);
         setLstm("")
@@ -136,6 +144,7 @@ function ModuleTwo() {
         setData(20);
         setMonth("month");
         setTime("month")
+      
 
 
         setIsActiveMonth(current => !current);
@@ -157,7 +166,7 @@ function ModuleTwo() {
 
         setData(sixmonth);
         setTime("quater");
-
+      
         setLstm("")
         setTtv("")
         settttv("")
@@ -175,6 +184,7 @@ function ModuleTwo() {
 
         setData(200);
         setTime("year")
+      
 
 
         setIsActiveYear(current => !current);
@@ -248,23 +258,15 @@ function ModuleTwo() {
         }
 
     }
-    function btChange() {
-        if (bT == "AR LSTM") {
-            setBt("")
-        } else {
-            setBt("AR LSTM")
-        }
-
-    }
     const [loading, setLoading] = useState(false);
     useEffect(() => {
 
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-        }, 5000)
+        }, 1000)
 
-    }, [time])
+    }, [time,matrix])
     console.log(Object.keys(myData).length);
 
     return (
@@ -274,14 +276,14 @@ function ModuleTwo() {
 
                 <div className="modelTop">
                     <div className="sumFor">
-                        <NavLink to="/input" className="links">
-                            <div className="sumary">Sumary</div>
+                        <NavLink to="/inputcruid" className="links">
+                            <div className="sumary">Summary</div>
                         </NavLink>
-                        <NavLink to="/model" className="links">
+                        <NavLink to="/cruidoiltwo" className="links">
                             <div className="forcasting">Forcasting</div>
                         </NavLink>
 
-                        <NavLink to="/per" className="links">
+                        <NavLink to="/percruid" className="links">
                             <div className="forcasting">Performance</div>
                         </NavLink>
                         <NavLink to="/naturalgasmatrix" className="links">
@@ -293,7 +295,7 @@ function ModuleTwo() {
                         <button onClick={handleClickWeek} id='A' style={{
                             backgroundColor: isActiveWeek ? '#13232e' : '',
                             color: isActiveWeek ? 'white' : '',
-                        }}>week</button>
+                        }}>Week</button>
                         <button onClick={handleClickMonth} id='B' style={{
                             backgroundColor: isActiveMonth ? '#13232e' : '',
                             color: isActiveMonth ? 'white' : '',
@@ -311,59 +313,37 @@ function ModuleTwo() {
                     </div>
                 </div>
                 <div className="modelBottom">
-                    <div className="backfont">
-                        NATURAL GAS
-                    </div>
-                    <div className="modelChart">
+
+                    <div className="modelChart" >
 
 
 
-                        <LineChart width={1200} height={380} data={myData}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Date" />
+                        <BarChart width={1100} height={320} data={myData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey={lstm} stroke="#99B898" strokeWidth={2} dot={false} />
+                            <Bar dataKey="LSTM" fill="#99B898" />
+                            <Bar dataKey="AR LSTM" fill="#2A3638" />
+                            <Bar dataKey="ConvNet" fill="#E84A5F" />
+                            <Bar dataKey="T2V" fill="#FECEA8" />
+                            <Bar dataKey="T2Vtransfomer" fill="#FF847C" />
+                            <Bar dataKey="basic_transfomer" fill="#82ca9d" />
+                        </BarChart>
+                    </div>
+                    <div className="iomoduleCheckbox" onMouseLeave={e => setAvtive(false)}>
+                        <div className="drop" onMouseEnter={e => setAvtive(!active)}>{matrix} <ArrowDropDownIcon/></div>
+                        {active && (
+                            <div className="on">
+                                <div className="error" onClick={()=> setMatrix("mean_squared_error")}>mean_squared_error</div>
+                                <div className="error" onClick={()=> setMatrix("mean_absolute_error")}>mean_absolute_error</div>
+                                <div className="error" onClick={()=> setMatrix("r2_score")}>r2_score</div>
+                                <div className="error" onClick={()=> setMatrix("mean_pinball_loss")}>mean_pinball_loss</div>
+                                <div className="error" onClick={()=> setMatrix("explained_variance_score")}> explained_variance_score</div>
+                            </div>
+                        )}
 
-                            <Line type="monotone" dataKey={covnet} stroke="#E84A5F" strokeWidth={2} dot={false} />
-                            <Line type="monotone" dataKey={ttv} stroke="#FECEA8" strokeWidth={2} dot={false} />
-                            <Line type="monotone" dataKey={tttv} stroke="#FF847C" strokeWidth={2} dot={false} />
-                            <Line type="monotone" dataKey={arlstm} stroke="#2A3638" strokeWidth={2} dot={false} />
-                            <Line type="monotone" dataKey={bT} stroke="#2A3638" strokeWidth={2} dot={false} />
-                        </LineChart>
-                    </div>  
-                    <div className="iomoduleCheckbox">
-                        <div className="boxcheck">
-
-                            <input id='cOne' type="checkbox" onClick={lstmChange} autoComplete='off' /> <p>LSTM</p>
-                        </div>
-                        <div className="boxcheck" >
-
-                            <input id='cTwo' type="checkbox" onClick={ttvChange} /> <p>TTV</p>
-                        </div>
-                        <div className="boxcheck">
-
-                            <input id='cThree' type="checkbox" onClick={tttvChange} /> <p>TTTV</p>
-                        </div>
-                        <div className="boxcheck">
-
-                            <input id='cFour' type="checkbox" onClick={covnetChange} /> <p>COVNET</p>
-                        </div>
-                        <div className="boxcheck">
-
-                            <input id='cFive' type="checkbox" onClick={arlstmChange} /> <p>ARLSTM</p>
-                        </div>
-                        <div className="boxcheck">
-
-                            <input id='cFive' type="checkbox" onClick={btChange} /> <p>Basic Transfomer</p>
-                        </div>
-
-
-
-
-                        {/* <button className="checkBtn" onChange={finalModel} >Submit</button> */}
                     </div>
 
                 </div>
@@ -378,5 +358,5 @@ function ModuleTwo() {
     );
 }
 
-export default ModuleTwo;
+export default NaturalgasMatrix;
 
